@@ -54,13 +54,7 @@ public class WordTree {
 	
 	public boolean contains(String word) {
 
-
-		 if (containsRec(root,word)){
-			return true;
-		}
-		else{
-			return false;
-		}
+		return containsRec(root,word);
 	}
 
 	private boolean containsRec(TreeNode Node, String word) {
@@ -71,33 +65,27 @@ public class WordTree {
 				return false;
 			}
 			else{
-				if (Node.children[letterToInt(firstChar)].isWord) return true;
-
-				else return false;
+				return Node.children[letterToInt(firstChar)].isWord;
 			}
 		}
 		else{
 			String RemainingWord = word.substring(1);
-
 			if (Node.children[letterToInt(firstChar)] == null){
 				return false;
 			}
 			else{
-				if (containsRec(Node.children[letterToInt(firstChar)],RemainingWord)){
-					return true;
-				}
-				else{
-					return false;
-				}
+				return containsRec(Node.children[letterToInt(firstChar)],RemainingWord)
 			}
 		}
  	}
 	
 	public ArrayList<String> suggestCorrections(String word, int offBy) {
+		
 		ArrayList<String> list_of_words = WordEndings(root, "");
 		ArrayList<String> Suggested_Words = new ArrayList<>();
 
 		int error_margin = 0;
+		
 		for (int i = 0; i < list_of_words.size(); i++) {
 			error_margin = 0;
 			if (list_of_words.get(i).length() == word.length()) {
